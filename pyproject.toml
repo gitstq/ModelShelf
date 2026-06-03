@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "modelshelf"
+version = "1.0.0"
+description = "🗄️ A lightweight CLI tool for managing local AI models across multiple platforms"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "ModelShelf Team", email = "hello@modelshelf.dev"}
+]
+keywords = ["ai", "llm", "model", "cli", "ollama", "local-ai", "manager"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.25.0",
+    "pyyaml>=6.0",
+    "platformdirs>=3.0.0",
+    "psutil>=5.9.0",
+    "tabulate>=0.9.0",
+    "questionary>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "pre-commit>=3.0.0",
+]
+
+[project.scripts]
+modelshelf = "modelshelf.cli:main"
+ms = "modelshelf.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/modelshelf"
+Documentation = "https://github.com/yourusername/modelshelf#readme"
+Repository = "https://github.com/yourusername/modelshelf"
+Issues = "https://github.com/yourusername/modelshelf/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["modelshelf*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=modelshelf --cov-report=term-missing"
